@@ -1,0 +1,58 @@
+#App {
+    color: gray;
+    background: aquamarine;
+    border: thick double #32a1ce;
+
+}
+
+#Apps {
+    color: black;
+
+}
+
+#btn {
+    color: aqua;
+    background: black;
+    font-size: large;
+}
+
+#reset {
+    color: aqua;
+    background: black;
+    font-size: large;
+}
+
+#centre {
+
+    text-align: center;
+    border: dashed red;
+    padding: 10px;
+    width: 60%; /* Adjust the width as needed */
+    max-width: 400px; /* Set a maximum width if necessary */
+    margin: 0 auto; /* Center the div horizontally */
+
+
+}
+
+#image {
+        background: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2NjcxMC1pbWFnZS1rd3Z4eGVxcC5qcGc.jpg") no-repeat center center fixed;
+        background-size: cover; /* Cette ligne permet à l'image de couvrir l'intégralité de la page */
+        height: 100vh; /* Ajustez la hauteur si nécessaire */
+        margin: 0;
+
+
+}
+
+#Validée {
+    color: azure;
+}
+
+#failed {
+    color: azure;
+}
+
+#Ajout {
+    color: aqua;
+    background: black;
+    font-size: large;
+}

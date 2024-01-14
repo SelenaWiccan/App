@@ -1,5 +1,16 @@
 let reservations = 0;
 
+function supprimer(index) {
+    var champsSupplementaires = document.getElementById("champsSupplementaires");
+    var reservationToDelete = document.getElementById(`reservationDiv_${index}`);
+    var reservationTextToDelete = document.getElementsByName(`reservation_${index}`)[0];
+    champsSupplementaires.removeChild(reservationToDelete);
+
+    if (reservationTextToDelete) {
+        var outputElement = document.getElementById("reservationsOutput");
+        outputElement.removeChild(reservationTextToDelete);
+    }
+}
 function validate(event) {
     event.preventDefault();
     var elementAffichage = document.getElementById("affichageTexte");
@@ -18,13 +29,14 @@ function validate(event) {
         elementAffichage.innerHTML = ("Reservation ajoutée:");
         afficherReservations();
     } else {
-        alert("Veuillez sélectionner une date et indiquer le nombre de places.");
+        alert("sélectionne une date et indiquer le nombre de places.");
     }
 }
 
 function ajouter() {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
     var nouveauChamp = document.createElement("div");
+    nouveauChamp.setAttribute("id", `reservationDiv_${reservations}`);
 
     nouveauChamp.innerHTML = `
         <input type="text" placeholder="Nom" style="align-content: center" name="nom_${reservations}"> <br />
@@ -35,6 +47,7 @@ function ajouter() {
         <input type="date" placeholder="Date" name="date_${reservations}"> <br />
         <button type="submit" id="btn" name="btn_${reservations}"> Valider </button>
         <input type="reset" id="reset" name="reset${reservations}"> <br>
+        <button type="button" id="Supprimer" onclick="supprimer(${reservations})"> Supprimer </button>
     `;
 
     champsSupplementaires.appendChild(nouveauChamp);
@@ -59,7 +72,10 @@ function afficherReservations() {
         const reservationText = `Reservation ${i + 1}: Date - ${date}, Places - ${nombrePlaces}, Pour - ${nom}, - ${prenom}, - mail : ${email}, - ${telephone}`;
         const reservationItem = document.createElement("p");
         reservationItem.textContent = reservationText;
+        reservationItem.setAttribute("name", `reservation_${i}`);
         outputElement.appendChild(reservationItem);
     }
 }
+
+
 

@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title >Application de réservation</title>
+    <title>Application de réservation</title>
     <link rel="stylesheet" href="App.css" type="text/css">
 </head>
 
 <body>
-<h1 id="App" align="center"> Réservation des places pour 'La nuits des étoiles' ! </h1>
-<div id="centre" class="centre">
-    <br />
-    <input type="text" placeholder="Nom" style="align-content: center"  > <br />
-    <input type="text" placeholder="Prénom"> <br />
-    <input type="tel" placeholder="Téléphone"> <br />
-    <input type="email" placeholder="e-mail"> <br />
-    <input type="number" placeholder="Nombre de place"> <br />
-    <input type="date" placeholder="Date"> <br />
-    <input type="datetime-local" placeholder="Date 2"> <br />
-    <button type="submit" id="btn"> Valider </button>
-    <input type="reset" id="reset"> <br>
-    <div> <button type="submit" id="Ajout"> + </button> </div> <br>
-</div> <br>
+<h1 id="App" align="center"> Réservation des places pour 'La nuit des étoiles' ! </h1>
+<form id="reservationForm" onsubmit="validate(event)">
+    <div id="centre" class="centre">
+        <br />
+        <input type="text" placeholder="Nom" style="align-content: center" name="nom_0" required> <br />
+        <input type="text" placeholder="Prénom" name="prenom_0" required> <br />
+        <input type="tel" placeholder="Téléphone" name="telephone_0" required> <br />
+        <input type="email" placeholder="e-mail" name="email_0" required> <br />
+        <input type="number" placeholder="Nombre de place" name="nombre_0" required> <br />
+        <input type="date" placeholder="Date" name="date_0" required> <br />
+        <button type="submit" id="btn" name="btn_0"> Valider </button>
+        <input type="reset" id="reset" name="reset_0"> <br>
+        <div id="champsSupplementaires"></div>
+        <div> <button type="button" id="Ajout" onclick="ajouter()"> + </button> </div> <br>
+    </div> <br>
+</form>
 
-<body id="image" background="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2NjcxMC1pbWFnZS1rd3Z4eGVxcC5qcGc.jpg">
+<div id="affichageTexte"></div>
+<div id="reservationsOutput"></div>
+
+<body id="image" background="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2NjcxMC1pbMgFnZS1rd3Z4eGVxcC5qcGc.jpg">
 
 <script src="Code-de-l'application.js"></script>
 </body>

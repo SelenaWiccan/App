@@ -56,3 +56,10 @@
     background: black;
     font-size: large;
 }
+#affichageTexte {
+    color: white;
+}
+
+#reservationsOutput {
+    color: white;
+}

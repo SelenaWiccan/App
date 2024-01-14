@@ -1,6 +1,6 @@
 #App {
     color: gray;
-    background: aquamarine;
+    background: black;
     border: thick double #32a1ce;
 
 }
@@ -67,4 +67,18 @@
 
 #reservationsOutput {
     color: white;
+}
+
+#explications {
+
+    font-size: 24px;
+    font-weight: bold;
+    color: dodgerblue;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur du fond avec opacité (ici, 0.5 pour 50%) */
+    padding: 10px;
 }

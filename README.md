@@ -27,3 +27,10 @@ _CE ne FONCTIONNE pas ou à rajouter:_
 Autre :
 - Ajout d'une limite de places disponibles différentes en fonction du jour (laisser le jour affiché si il reste des places mais afficher le nombre de places restantes)
 - modification du champ email ( le faire dans un champ de type texte qui ne réagit que si il lit @gmail @outlook @orange.fr sinon l'email est invalide)
+- mettre des espaces entre les formulaires
+
+AUTRES 2 :
+Les choses qui me sont difficiles sont les nouvelles notions et les faire fonctionner cela prends beaucoup de temps. Quelques points ne fonctionnent toujours pas dans le code comme listé ci-dessus. Il y a des modifications à faire et des éléments à supprimer
+
+QUESTIONS : 
+comment faire la selection de date ?

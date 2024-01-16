@@ -30,6 +30,7 @@ Autre (ajout optionel ? ):
 - Rajouter une année pour la selection de date l'heure, type d'événement et l'emplacement
 - Affichage en temps réel de la disponibilité des places
 - Possibilité d'annuler ou de modifier les réservations sous condition, à déterminer. Autre que le bouton supprimer
+- lister les dates et afficher en temps réel le nombre de place restantes ou complets
 
 AUTRES 2 :
 Les choses qui me sont difficiles sont les nouvelles notions et les faire fonctionner cela prends beaucoup de temps. Quelques points ne fonctionnent toujours pas dans le code comme listé ci-dessus. Il y a des modifications à faire et des éléments à supprimer

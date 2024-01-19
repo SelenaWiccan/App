@@ -82,3 +82,9 @@
     background-color: rgba(0, 0, 0, 0.5); /* Couleur du fond avec opacité (ici, 0.5 pour 50%) */
     padding: 10px;
 }
+
+#Ajouter {
+    color: aqua;
+    background: black;
+    font-size: large;
+}

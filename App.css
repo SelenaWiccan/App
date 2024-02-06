@@ -88,3 +88,10 @@
     background: black;
     font-size: large;
 }
+
+#plus {
+    color: aqua;
+    background: black;
+    font-size: large;
+    display: none;
+}

@@ -11,27 +11,11 @@
 <form id="reservationForm" onsubmit="validate(event)">
     <div id="centre" class="centre">
         <br />
-<!--        <input type="text" placeholder="Nom" style="align-content: center" name="nom_0" required> <br />-->
-<!--        <input type="text" placeholder="Prénom" name="prenom_0" required> <br />-->
-<!--        <input type="tel" placeholder="Téléphone" name="telephone_0" required> <br />-->
-<!--        <input type="email" placeholder="e-mail" name="email_0" required> <br />-->
-<!--        <input type="number" placeholder="Nombre de place" name="nombre_0" required> <br />-->
-<!--        <select name="date_0" required> <br />-->
-<!--            <option value="rien" selected="true" >Sélectionnez votre date</option>-->
-<!--            <optgroup label="Dates en 2024"></optgroup>-->
-<!--            <option value="13Août">13 Août</option>-->
-<!--            <option value="31Août">31 Août</option>-->
-<!--            <option value="9Septembre">9 Septembre</option>-->
-<!--            <optgroup label="Dates en 2025"></optgroup>-->
-<!--            <option value="10Janvier">10 Janvier</option>-->
-<!--            <option value="15Février">15 Février</option>-->
-<!--            <option value="5Août">5 Août</option>-->
-<!--        </select> <br />-->
-<!--        <br /><button type="submit" id="btn" name="btn_0"> Valider </button>-->
-<!--        <input type="reset" id="reset" name="reset_0"> <br>-->
-<!--        <button type="button" id="Supprimer" name="Supprimer_0"> Supprimer </button>-->
-        <div id="champsSupplementaires"></div>
-        <div> <button type="button" id="Ajout" onclick="ajouter()"> Réserver une nouvelle place </button> </div> <br>
+        <div id="champsSupplementaires">
+            <button type="button" id="plus" onClick="ajouter()" style="display: none;"> + 1 place </button>
+        </div>
+        <div> <button type="button" id="Ajout" onclick="ajouter();add()"> Réserver une nouvelle place </button> </div> <br>
+
     </div> <br>
 </form>
 

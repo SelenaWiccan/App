@@ -10,11 +10,23 @@ function supprimer(index) {
         var outputElement = document.getElementById("reservationsOutput");
         outputElement.removeChild(reservationTextToDelete);
     }
+    // Réafficher le bouton Ajout s'il n'y a plus de formulaires
+    if (champsSupplementaires.children.length === 0) {
+        const div = document.getElementById("Ajout");
+        div.style.display = "block";
+    }
 }
 function validate(event) {
     event.preventDefault();
     var elementAffichage = document.getElementById("affichageTexte");
     alert("Envoi du formulaire avec les réservations:");
+    const plus = document.getElementById("plus");
+    plus.style.display = "block"; // Afficher le bouton
+
+    plus.addEventListener('click', function() {
+        plus.style.display = "none"; // Cacher le bouton lorsqu'il est cliqué
+    });
+
     afficherReservations();
     const telephone = document.getElementsByName(`telephone_${reservations}`)[0].value;
     const prenom = document.getElementsByName(`prenom_${reservations}`)[0].value;
@@ -30,6 +42,7 @@ function validate(event) {
         alert("sélectionne une date et indiquer le nombre de places.");
     }
 }
+
 
 function ajouter() {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
@@ -56,7 +69,7 @@ function ajouter() {
         <button type="submit" id="btn" name="btn_${reservations}" > Valider </button>
         <input type="reset" id="reset" name="reset${reservations}"> <br>
         <button type="button" id="Supprimer" onclick="supprimer(${reservations})"> Supprimer </button> <br />
-        <div> <button type="button" id="Ajouter" onclick="ajouter()"> + </button> </div> <br>
+        
     `;
 
     champsSupplementaires.appendChild(nouveauChamp);
@@ -64,24 +77,33 @@ function ajouter() {
     reservations++; // Incrémentation
 }
 
-function add() { // si le formulaire = vrai donc est affiché le code va cacher le boutton reserver une nouvelle place et si le formulaire renvoi false donc le formulaire n'est pas affiché alors le bouton réserver une nouvelle place sera caché
-    if (test==true) { //NE MARCHE PAS POUR L'INSTANT
-        ajouter()
-    } else if (test==false) {
-        var champsSupplementaires = document.getElementById("champsSupplementaires");
-        nouveau.setAttribute("id", `reservationDiv_${reservations}`);
-        nouveau.innerHTML = `
-         <div> <button type="button" id="Ajouter" onclick="ajouter()"> + </button> </div> <br>
-    `;
-        champsSupplementaires.appendChild(nouveau);
+function add() {
+    const div = document.getElementById("Ajout");
 
-        reservations++; // Incrémentation
+    // Vérifier si au moins un formulaire est affiché
+    let formDisplayed = false;
+    for (let i = 0; i <= 2; i++) {
+        const reservationDiv = document.getElementById(`reservationDiv_${i}`);
+        if (reservationDiv) {
+            formDisplayed = true;
+        }
+    }
+
+    if (formDisplayed) {
+        div.style.display = "none"; // Masquer le bouton si au moins un formulaire est affiché
+    } else {
+        div.style.display = "block"; // Réafficher le bouton si aucun formulaire n'est affiché
+        ajouter();
     }
 }
+
+
+
 
 function afficherReservations() {
     const outputElement = document.getElementById("reservationsOutput");
 
+    // Effacer le contenu précédent
     outputElement.innerHTML = "";
 
     for (let i = 0; i < reservations; i++) {
@@ -96,9 +118,6 @@ function afficherReservations() {
         const reservationItem = document.createElement("p");
         reservationItem.textContent = reservationText;
         reservationItem.setAttribute("name", `reservation_${i}`);
-        outputElement.appendChild(reservationItem);
+        outputElement.appendChild(reservationItem); // Ajouter chaque réservation à l'élément de sortie
     }
 }
-
-
-

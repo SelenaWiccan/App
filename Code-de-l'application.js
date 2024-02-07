@@ -10,12 +10,25 @@ function supprimer(index) {
         var outputElement = document.getElementById("reservationsOutput");
         outputElement.removeChild(reservationTextToDelete);
     }
-    // Réafficher le bouton Ajout s'il n'y a plus de formulaires
-    if (champsSupplementaires.children.length === 0) {
+
+    // Vérifier si plus aucun formulaire n'est affiché
+    let formDisplayed = false;
+    for (let i = 0; i < reservations; i++) {
+        const reservationDiv = document.getElementById(`reservationDiv_${i}`);
+        if (reservationDiv) {
+            formDisplayed = true;
+            break; // Sortir de la boucle dès qu'un formulaire est trouvé
+        }
+    }
+
+    // Réafficher le bouton Ajout si aucun formulaire n'est affiché (marche pas)
+    if (!formDisplayed) {
         const div = document.getElementById("Ajout");
         div.style.display = "block";
     }
 }
+
+
 function validate(event) {
     event.preventDefault();
     var elementAffichage = document.getElementById("affichageTexte");
@@ -82,20 +95,16 @@ function add() {
 
     // Vérifier si au moins un formulaire est affiché
     let formDisplayed = false;
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i < reservations; i++) {
         const reservationDiv = document.getElementById(`reservationDiv_${i}`);
+
         if (reservationDiv) {
             formDisplayed = true;
+            div.style.display = "none";
         }
     }
-
-    if (formDisplayed) {
-        div.style.display = "none"; // Masquer le bouton si au moins un formulaire est affiché
-    } else {
-        div.style.display = "block"; // Réafficher le bouton si aucun formulaire n'est affiché
-        ajouter();
-    }
 }
+
 
 
 

@@ -1,4 +1,5 @@
 let reservations = 0;
+let reservationsData = []; // Tableau pour stocker les données des réservations
 
 function supprimer(index) {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
@@ -13,21 +14,19 @@ function supprimer(index) {
 
     // Vérifier si plus aucun formulaire n'est affiché
     let formDisplayed = false;
-    for (let i = 0; i < reservations; i++) {
-        const reservationDiv = document.getElementById(`reservationDiv_${i}`);
-        if (reservationDiv) {
+    for (let i = 0; i < reservationsData.length; i++) {
+        if (reservationsData[i]) {
             formDisplayed = true;
-            break; // Sortir de la boucle dès qu'un formulaire est trouvé
+            break; // Sortir de la boucle dès qu'une réservation est trouvée
         }
     }
 
-    // Réafficher le bouton Ajout si aucun formulaire n'est affiché (marche pas)
+    // Réafficher le bouton Ajout si aucun formulaire n'est affiché
     if (!formDisplayed) {
         const div = document.getElementById("Ajout");
         div.style.display = "block";
     }
 }
-
 
 function validate(event) {
     event.preventDefault();
@@ -40,25 +39,40 @@ function validate(event) {
         plus.style.display = "none"; // Cacher le bouton lorsqu'il est cliqué
     });
 
-    afficherReservations();
-    const telephone = document.getElementsByName(`telephone_${reservations}`)[0].value;
-    const prenom = document.getElementsByName(`prenom_${reservations}`)[0].value;
-    const nom = document.getElementsByName(`nom_${reservations}`)[0].value;
-    const email = document.getElementsByName(`email_${reservations}`)[0].value;
-    const date = document.getElementsByName(`date_${reservations}`)[0].value;
-    const nombrePlaces = document.getElementsByName(`nombre_${reservations}`)[0].value;
-    if (date && nombrePlaces && email && nom && prenom && telephone) {
-        reservations++;
-        elementAffichage.innerHTML = ("Reservation ajoutée:");
-        afficherReservations();
-    } else {
-        alert("sélectionne une date et indiquer le nombre de places.");
+    // Parcourir les réservations existantes
+    for (let i = 0; i < reservations; i++) {
+        const telephone = document.getElementsByName(`telephone_${i}`)[0].value;
+        const prenom = document.getElementsByName(`prenom_${i}`)[0].value;
+        const nom = document.getElementsByName(`nom_${i}`)[0].value;
+        const email = document.getElementsByName(`email_${i}`)[0].value;
+        const date = document.getElementsByName(`date_${i}`)[0].value;
+        const nombrePlaces = document.getElementsByName(`nombre_${i}`)[0].value;
+
+        // Vérifier si tous les champs sont remplis avant d'ajouter la réservation
+        if (date && nombrePlaces && email && nom && prenom && telephone) {
+            reservationsData.push({ date, nombrePlaces, email, nom, prenom, telephone });
+        } else {
+            alert("Sélectionnez une date et indiquez le nombre de places.");
+            return; // Sortir de la fonction si un champ n'est pas rempli
+        }
     }
+
+    // Mettre à jour l'affichage avec les nouvelles réservations
+    afficherReservations();
 }
 
 
 function ajouter() {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
+
+    // Effacer l'affichage des réservations précédentes
+    const outputElement = document.getElementById("reservationsOutput");
+    outputElement.innerHTML = "";
+
+    // Afficher chaque réservation à partir du tableau reservationsData
+    afficherReservations();
+
+    // Créer un nouveau champ de réservation
     var nouveauChamp = document.createElement("div");
     nouveauChamp.setAttribute("id", `reservationDiv_${reservations}`);
 
@@ -68,7 +82,7 @@ function ajouter() {
         <input type="tel" placeholder="Téléphone" name="telephone_${reservations}" required> <br />
         <input type="email" placeholder="e-mail" name="email_${reservations}" required> <br />
         <input type="number" placeholder="Nombre de place" name="nombre_${reservations}" required> <br />
-          <select name="date_0" required> <br />
+          <select name="date_${reservations}" required> <br />
             <option value="rien" selected="true" >Sélectionnez votre date</option>
             <optgroup label="Dates en 2024"></optgroup>
             <option value="13Août">13 Août</option>
@@ -79,7 +93,7 @@ function ajouter() {
             <option value="15Février">15 Février</option>
             <option value="5Août">5 Août</option>
         </select> <br />
-        <button type="submit" id="btn" name="btn_${reservations}" > Valider </button>
+        <button type="submit" id="btn" name="btn_${reservations}" onclick="effacer()"> Valider </button>
         <input type="reset" id="reset" name="reset${reservations}"> <br>
         <button type="button" id="Supprimer" onclick="supprimer(${reservations})"> Supprimer </button> <br />
         
@@ -87,46 +101,48 @@ function ajouter() {
 
     champsSupplementaires.appendChild(nouveauChamp);
 
-    reservations++; // Incrémentation
+    // Incrémentation
+    reservations++;
+
+    // Masquer le bouton "Réserver une place" après avoir ajouté le champ de réservation
+    const div = document.getElementById("Ajout");
+    div.style.display = "none";
 }
+
+
 
 function add() {
     const div = document.getElementById("Ajout");
 
     // Vérifier si au moins un formulaire est affiché
     let formDisplayed = false;
-    for (let i = 0; i < reservations; i++) {
-        const reservationDiv = document.getElementById(`reservationDiv_${i}`);
-
-        if (reservationDiv) {
+    for (let i = 0; i < reservationsData.length; i++) {
+        if (reservationsData[i]) {
             formDisplayed = true;
             div.style.display = "none";
+            break;
         }
     }
 }
 
-
-
-
-
+function effacer(){
+    const valide = document.getElementById("btn");
+    const efface = document.getElementById("reset");
+    valide.style.display = "none";
+    efface.style.display = "none";
+}
 function afficherReservations() {
     const outputElement = document.getElementById("reservationsOutput");
 
     // Effacer le contenu précédent
     outputElement.innerHTML = "";
 
-    for (let i = 0; i < reservations; i++) {
-        const telephone = document.getElementsByName(`telephone_${i}`)[0].value;
-        const prenom = document.getElementsByName(`prenom_${i}`)[0].value;
-        const nom = document.getElementsByName(`nom_${i}`)[0].value;
-        const date = document.getElementsByName(`date_${i}`)[0].value;
-        const nombrePlaces = document.getElementsByName(`nombre_${i}`)[0].value;
-        const email = document.getElementsByName(`email_${i}`)[0].value;
-
-        const reservationText = `Reservation ${i + 1}: Date - ${date}, Places - ${nombrePlaces}, Pour - ${nom}, - ${prenom}, - mail : ${email}, - ${telephone}`;
+    // Afficher chaque réservation
+    reservationsData.forEach((reservation, index) => {
+        const reservationText = `Reservation ${index + 1}: Date - ${reservation.date}, Places - ${reservation.nombrePlaces}, Pour - ${reservation.nom}, - ${reservation.prenom}, - mail : ${reservation.email}, - ${reservation.telephone}`;
         const reservationItem = document.createElement("p");
         reservationItem.textContent = reservationText;
-        reservationItem.setAttribute("name", `reservation_${i}`);
-        outputElement.appendChild(reservationItem); // Ajouter chaque réservation à l'élément de sortie
-    }
+        reservationItem.setAttribute("name", `reservation_${index}`);
+        outputElement.appendChild(reservationItem);
+    });
 }

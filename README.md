@@ -25,6 +25,5 @@ DIFFICULTES :
 Les choses qui me sont difficiles sont les nouvelles notions et les faire fonctionner cela prends beaucoup de temps. Quelques points ne fonctionnent toujours pas dans le code comme listé ci-dessus. Il y a des modifications à faire et des éléments à supprimer
 
 QUESTIONS : 
-comment faire la selection de date avec un déroulant ?
-comment supprimer le premier champs de formulaire ?
+ ?
 

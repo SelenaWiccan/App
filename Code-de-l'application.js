@@ -1,6 +1,32 @@
 let reservations = 0;
 let reservationsData = []; // Tableau
 
+// Fonction pour gérer la sélection des dates dans la liste déroulante
+function handleDateSelection(index) {
+    const selectedDate = document.getElementsByName(`date_${index}`)[0].value;
+    const selectOptions = document.querySelectorAll(`select[name^="date_"] option`);
+
+    selectOptions.forEach(option => {
+        if (option.value === selectedDate) {
+            option.disabled = true;
+            option.hidden = true;
+        }
+    });
+}
+
+// Fonction pour réinsérer la date dans la liste déroulante si la réservation est supprimée
+function reinsertDate(index) {
+    const selectedDate = document.getElementsByName(`date_${index}`)[0].value;
+    const selectOptions = document.querySelectorAll(`select[name^="date_"] option`);
+
+    selectOptions.forEach(option => {
+        if (option.value === selectedDate) {
+            option.disabled = false;
+            option.hidden = false;
+        }
+    });
+}
+
 function supprimer(index) {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
     var reservationToDelete = document.getElementById(`reservationDiv_${index}`);
@@ -78,7 +104,7 @@ function ajouter() {
         <input type="tel" placeholder="Téléphone" name="telephone_${reservations}" required> <br />
         <input type="email" placeholder="e-mail" name="email_${reservations}" required> <br />
         <input type="number" placeholder="Nombre de place" name="nombre_${reservations}" required> <br />
-          <select name="date_${reservations}" required> <br />
+          <select name="date_${reservations}" onchange="handleDateSelection(${reservations})" required> <br />
             <option value="rien" selected="true" >Sélectionnez votre date</option>
             <optgroup label="Dates en 2024"></optgroup>
             <option value="13Août">13 Août</option>
@@ -95,15 +121,26 @@ function ajouter() {
         
     `;
 
+    // Vérifier si la date est déjà sélectionnée dans un formulaire existant
+    const selectedDates = document.querySelectorAll('select[name^="date_"] option:checked');
+    const datesArray = Array.from(selectedDates).map(option => option.value);
+
+    const selectElement = nouveauChamp.querySelector('select[name^="date_"]');
+    const options = selectElement.querySelectorAll('option');
+
+    options.forEach(option => {
+        if (datesArray.includes(option.value)) {
+            option.disabled = true;
+            option.hidden = true;
+        }
+    });
+
     champsSupplementaires.appendChild(nouveauChamp);
-
-    // Incrémentation
     reservations++;
-
-    // Masquer le bouton "Réserver une place"
     const div = document.getElementById("Ajout");
     div.style.display = "none";
 }
+
 
 
 

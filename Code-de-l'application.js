@@ -14,19 +14,6 @@ function handleDateSelection(index) {
     });
 }
 
-// Fonction pour réinsérer la date dans la liste déroulante si la réservation est supprimée
-function reinsertDate(index) {
-    const selectedDate = document.getElementsByName(`date_${index}`)[0].value;
-    const selectOptions = document.querySelectorAll(`select[name^="date_"] option`);
-
-    selectOptions.forEach(option => {
-        if (option.value === selectedDate) {
-            option.disabled = false;
-            option.hidden = false;
-        }
-    });
-}
-
 function supprimer(index) {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
     var reservationToDelete = document.getElementById(`reservationDiv_${index}`);
@@ -47,7 +34,7 @@ function supprimer(index) {
         }
     }
 
-    // Réafficher le bouton Ajout si aucun formulaire n'est affiché
+    // affiche bouton ajout
     if (!formDisplayed) {
         const div = document.getElementById("Ajout");
         div.style.display = "block";
@@ -57,7 +44,7 @@ function supprimer(index) {
 function validate(event) {
     event.preventDefault();
     var elementAffichage = document.getElementById("affichageTexte");
-    alert("Envoi du formulaire avec les réservations:");
+
     const plus = document.getElementById("plus");
     plus.style.display = "block";
 
@@ -72,6 +59,16 @@ function validate(event) {
         const email = document.getElementsByName(`email_${i}`)[0].value;
         const date = document.getElementsByName(`date_${i}`)[0].value;
         const nombrePlaces = document.getElementsByName(`nombre_${i}`)[0].value;
+
+        // Vérifier si une date a été sélectionnée
+        if (date === "rien") {
+            alert("Vous n'avez pas sélectionné de date.");
+            plus.style.display = "none";
+            return;
+        } else if (date === date.value){
+            alert("Envoi du formulaire avec les réservations:");
+            plus.style.display = "block";
+        }
 
         // Vérifier
         if (date && nombrePlaces && email && nom && prenom && telephone) {
@@ -121,7 +118,7 @@ function ajouter() {
         
     `;
 
-    // Vérifier si la date est déjà sélectionnée dans un formulaire existant
+    // Vérifier si la date est déjà sélectionnée dans un formulaire existant et affiché
     const selectedDates = document.querySelectorAll('select[name^="date_"] option:checked');
     const datesArray = Array.from(selectedDates).map(option => option.value);
 
@@ -154,7 +151,7 @@ function effacer(index){
 function add() {
     const div = document.getElementById("Ajout");
 
-    // Vérifier si au moins un formulaire est affiché
+    // formulaire est affiché
     let formDisplayed = false;
     for (let i = 0; i < reservationsData.length; i++) {
         if (reservationsData[i]) {
@@ -181,7 +178,7 @@ function afficherReservations() {
         outputElement.appendChild(reservationItem);
     });
 
-    // Vider le tableau après affichage
+    // Vider le tableau après affichage (cause de doublons)
     reservationsData = [];
 }
 

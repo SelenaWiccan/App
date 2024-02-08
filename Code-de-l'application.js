@@ -2,46 +2,17 @@ let reservations = 0;
 let reservationsData = []; // Tableau
 
 // Fonction pour gérer la sélection des dates dans la liste déroulante
-// Fonction pour gérer la sélection des dates dans la liste déroulante
-// Fonction pour gérer la sélection des dates dans la liste déroulante
 function handleDateSelection(index) {
     const selectedDate = document.getElementsByName(`date_${index}`)[0].value;
     const selectOptions = document.querySelectorAll(`select[name^="date_"] option`);
 
-    // Désactiver et masquer la date sélectionnée dans toutes les listes déroulantes
     selectOptions.forEach(option => {
         if (option.value === selectedDate) {
             option.disabled = true;
             option.hidden = true;
         }
     });
-
-    // Parcourir tous les formulaires existants
-    for (let i = 0; i < reservations; i++) {
-        if (i !== index) {
-            const otherSelectOptions = document.querySelectorAll(`select[name="date_${i}"] option`);
-            otherSelectOptions.forEach(option => {
-                if (option.value === selectedDate) {
-                    option.disabled = true;
-                    option.hidden = true;
-                }
-            });
-        }
-    }
-
-    // Parcourir tous les nouveaux formulaires créés après la validation
-    for (let i = reservations; i < reservationsData.length; i++) {
-        const newSelectOptions = document.querySelectorAll(`select[name="date_${i}"] option`);
-        newSelectOptions.forEach(option => {
-            if (option.value === selectedDate) {
-                option.disabled = true;
-                option.hidden = true;
-            }
-        });
-    }
 }
-
-
 
 // Fonction pour réinsérer la date dans la liste déroulante si la réservation est supprimée
 function reinsertDate(index) {
@@ -150,20 +121,26 @@ function ajouter() {
         
     `;
 
+    // Vérifier si la date est déjà sélectionnée dans un formulaire existant
+    const selectedDates = document.querySelectorAll('select[name^="date_"] option:checked');
+    const datesArray = Array.from(selectedDates).map(option => option.value);
+
+    const selectElement = nouveauChamp.querySelector('select[name^="date_"]');
+    const options = selectElement.querySelectorAll('option');
+
+    options.forEach(option => {
+        if (datesArray.includes(option.value)) {
+            option.disabled = true;
+            option.hidden = true;
+        }
+    });
+
     champsSupplementaires.appendChild(nouveauChamp);
-// function bloque() {
-//     const nomInput = nouveauChamp.querySelector(`input[name="nom_${reservations}"]`);
-//     nomInput.disabled = true;
-// }
-
-
-    // Incrémentation
     reservations++;
-
-    // Masquer le bouton "Réserver une place"
     const div = document.getElementById("Ajout");
     div.style.display = "none";
 }
+
 
 
 

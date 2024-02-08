@@ -115,8 +115,8 @@ function ajouter() {
             <option value="15Février">15 Février</option>
             <option value="5Août">5 Août</option>
         </select> <br />
-        <button type="submit" id="btn_${reservations}" name="btn_${reservations}" onclick="effacer(${reservations})"> Valider </button>
-        <input type="reset" id="reset_${reservations}" name="reset${reservations}"> <br>
+        <button type="submit" id="btn_${reservations}" name="btn_${reservations}" onclick="effacer(${reservations})" style="color: aqua; background: black; font-size: large;" > Valider </button>
+        <input type="reset" id="reset_${reservations}" name="reset${reservations}" style="color: aqua; background: black; font-size: large;"> <br>
         <button type="button" id="Supprimer" onclick="supprimer(${reservations})"> Supprimer </button> <br />
         
     `;
@@ -169,6 +169,7 @@ function add() {
 function afficherReservations() {
     const outputElement = document.getElementById("reservationsOutput");
 
+    // Effacer le contenu précédent
     outputElement.innerHTML = "";
 
     // Afficher chaque réservation
@@ -179,4 +180,8 @@ function afficherReservations() {
         reservationItem.setAttribute("name", `reservation_${index}`);
         outputElement.appendChild(reservationItem);
     });
+
+    // Vider le tableau après affichage
+    reservationsData = [];
 }
+

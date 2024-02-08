@@ -115,8 +115,8 @@ function ajouter() {
             <option value="15Février">15 Février</option>
             <option value="5Août">5 Août</option>
         </select> <br />
-        <button type="submit" id="btn" name="btn_${reservations}" onclick="effacer()"> Valider </button>
-        <input type="reset" id="reset" name="reset${reservations}"> <br>
+        <button type="submit" id="btn_${reservations}" name="btn_${reservations}" onclick="effacer(${reservations})"> Valider </button>
+        <input type="reset" id="reset_${reservations}" name="reset${reservations}"> <br>
         <button type="button" id="Supprimer" onclick="supprimer(${reservations})"> Supprimer </button> <br />
         
     `;
@@ -141,6 +141,13 @@ function ajouter() {
     div.style.display = "none";
 }
 
+function effacer(index){
+    const valide = document.getElementById(`btn_${index}`);
+    const efface = document.getElementById(`reset_${index}`);
+    valide.style.display = "none";
+    efface.style.display = "none";
+}
+
 
 
 
@@ -158,12 +165,7 @@ function add() {
     }
 }
 
-function effacer(){
-    const valide = document.getElementById("btn");
-    const efface = document.getElementById("reset");
-    valide.style.display = "none";
-    efface.style.display = "none";
-}
+
 function afficherReservations() {
     const outputElement = document.getElementById("reservationsOutput");
 

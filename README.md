@@ -18,12 +18,12 @@ _CE QUI FONCTIONNE:_
 - le champ email demande une email valide donc avec un @
 - le champs du nombre de place est requis { "veuillez entrer un nombre" }
 - seul 1 bouton est visible au début du code.
+- Le formulaire semble ne pas se valider et renvoie une erreur si aucune date n'est selectionnée
 ******************************************************************************************
 
 _CE ne FONCTIONNE pas:_
 **********************************************************************
 - Bloquer le champs de formulaire pour ne pas que l'utilisateur puisse mettre à jour les données : solution, faire disparaitre le bouton valider
-- Le formulaire se valide même si aucune date n'est selectionnée
 ******************************************************
 
 DIFFICULTES :

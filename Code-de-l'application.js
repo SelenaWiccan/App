@@ -1,6 +1,61 @@
 let reservations = 0;
 let reservationsData = []; // Tableau
 
+// Fonction pour gérer la sélection des dates dans la liste déroulante
+// Fonction pour gérer la sélection des dates dans la liste déroulante
+// Fonction pour gérer la sélection des dates dans la liste déroulante
+function handleDateSelection(index) {
+    const selectedDate = document.getElementsByName(`date_${index}`)[0].value;
+    const selectOptions = document.querySelectorAll(`select[name^="date_"] option`);
+
+    // Désactiver et masquer la date sélectionnée dans toutes les listes déroulantes
+    selectOptions.forEach(option => {
+        if (option.value === selectedDate) {
+            option.disabled = true;
+            option.hidden = true;
+        }
+    });
+
+    // Parcourir tous les formulaires existants
+    for (let i = 0; i < reservations; i++) {
+        if (i !== index) {
+            const otherSelectOptions = document.querySelectorAll(`select[name="date_${i}"] option`);
+            otherSelectOptions.forEach(option => {
+                if (option.value === selectedDate) {
+                    option.disabled = true;
+                    option.hidden = true;
+                }
+            });
+        }
+    }
+
+    // Parcourir tous les nouveaux formulaires créés après la validation
+    for (let i = reservations; i < reservationsData.length; i++) {
+        const newSelectOptions = document.querySelectorAll(`select[name="date_${i}"] option`);
+        newSelectOptions.forEach(option => {
+            if (option.value === selectedDate) {
+                option.disabled = true;
+                option.hidden = true;
+            }
+        });
+    }
+}
+
+
+
+// Fonction pour réinsérer la date dans la liste déroulante si la réservation est supprimée
+function reinsertDate(index) {
+    const selectedDate = document.getElementsByName(`date_${index}`)[0].value;
+    const selectOptions = document.querySelectorAll(`select[name^="date_"] option`);
+
+    selectOptions.forEach(option => {
+        if (option.value === selectedDate) {
+            option.disabled = false;
+            option.hidden = false;
+        }
+    });
+}
+
 function supprimer(index) {
     var champsSupplementaires = document.getElementById("champsSupplementaires");
     var reservationToDelete = document.getElementById(`reservationDiv_${index}`);
@@ -78,7 +133,7 @@ function ajouter() {
         <input type="tel" placeholder="Téléphone" name="telephone_${reservations}" required> <br />
         <input type="email" placeholder="e-mail" name="email_${reservations}" required> <br />
         <input type="number" placeholder="Nombre de place" name="nombre_${reservations}" required> <br />
-          <select name="date_${reservations}" required> <br />
+          <select name="date_${reservations}" onchange="handleDateSelection(${reservations})" required> <br />
             <option value="rien" selected="true" >Sélectionnez votre date</option>
             <optgroup label="Dates en 2024"></optgroup>
             <option value="13Août">13 Août</option>
@@ -96,6 +151,11 @@ function ajouter() {
     `;
 
     champsSupplementaires.appendChild(nouveauChamp);
+// function bloque() {
+//     const nomInput = nouveauChamp.querySelector(`input[name="nom_${reservations}"]`);
+//     nomInput.disabled = true;
+// }
+
 
     // Incrémentation
     reservations++;
